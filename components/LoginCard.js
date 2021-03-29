@@ -4,8 +4,6 @@ import { StyleSheet, View, Text, Button, Linking } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import Input from "./Input";
 const LoginCard = () => {
-  const [username, onChangeUsername] = useState("");
-  const [password, onChangePassword] = useState("");
   const btnHandler = () => {};
   return (
     <>
