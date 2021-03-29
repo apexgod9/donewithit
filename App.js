@@ -16,11 +16,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  cardLogin: {
-    backgroundColor: "#f9f3f3",
-    alignItems: "center",
-    width: "70%",
-  },
 });
 
 export default App;

@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import {
-  StyleSheet,
-  View,
-  Text,
-  Button,
-  TextInput,
-  Linking,
-} from "react-native";
+import { StyleSheet, View, Text, Button, Linking } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-
+import Input from "./Input";
 const LoginCard = () => {
   const [username, onChangeUsername] = useState("");
   const [password, onChangePassword] = useState("");
@@ -18,16 +11,8 @@ const LoginCard = () => {
     <>
       <View style={styles.cardLogin}>
         <Text>Login</Text>
-        <TextInput
-          onChangeText={onChangeUsername}
-          value={username}
-          placeholder="username"
-        />
-        <TextInput
-          onChangeText={onChangePassword}
-          value={password}
-          placeholder="password"
-        />
+        <Input placeholder="username" />
+        <Input placeholder="password" type="numeric" />
         <Button title="Press me" onPress={() => btnHandler()} />
         <Text
           style={{ color: "green" }}
@@ -58,16 +43,13 @@ const LoginCard = () => {
   );
 };
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#9ddfd3",
-    alignItems: "center",
-    justifyContent: "center",
-  },
   cardLogin: {
     backgroundColor: "#f9f3f3",
     alignItems: "center",
     width: "70%",
+    borderRadius: 30,
+    borderWidth: 1,
+    overflow: "hidden",
   },
 });
 
