@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View, Text, Linking } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  Linking,
+  KeyboardAvoidingView,
+} from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Input, Image } from "react-native-elements";
 
-const LoginScreen = () => {
+const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = () => {};
-  const btnHandler = () => {};
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container}>
       <View style={styles.loginCard}>
         <StatusBar style="dark" />
         <Image
@@ -21,7 +26,6 @@ const LoginScreen = () => {
         <Text style={styles.cardHeader}>Login</Text>
         <Input
           placeholder="email"
-          autoFocus
           value={email}
           onChangeText={(text) => setEmail(text)}
         />
@@ -50,13 +54,12 @@ const LoginScreen = () => {
         ></Icon.Button>
       </View>
       <Text style={{ color: "green" }}>Don't have an account?</Text>
-      <Text
-        style={{ color: "green" }}
-        onPress={() => Linking.openURL("http://google.com")}
-      >
-        Register
-      </Text>
-    </View>
+      <Button
+        title="Register"
+        containerStyle={styles.outerBtn}
+        onPress={() => navigation.navigate("Register")}
+      />
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({
@@ -64,7 +67,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#8ac4d0",
+    backgroundColor: "#f8a1d1",
   },
   loginCard: {
     backgroundColor: "#f9f3f3",
@@ -79,7 +82,13 @@ const styles = StyleSheet.create({
     margin: 3,
     fontSize: 29,
   },
-  button: {},
+  button: {
+    width: 80,
+    marginBottom: 10,
+  },
+  outerBtn: {
+    marginTop: 10,
+  },
 });
 
 export default LoginScreen;

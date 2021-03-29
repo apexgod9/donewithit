@@ -4,14 +4,18 @@ import { StyleSheet, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 
 const Stack = createStackNavigator();
 const globalSreenOptions = {
   headerStyle: {
-    backgroundColor: "#f4f9f9",
+    backgroundColor: "#b34180",
   },
-  headerTitleStyle: { color: "#f4f9f9" },
+  headerTitleStyle: {
+    color: "#f4f9f9",
+  },
   headerTintColor: "white",
+  headerBackTitle: "Back",
 };
 
 function App() {
@@ -19,6 +23,7 @@ function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={globalSreenOptions}>
         <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
