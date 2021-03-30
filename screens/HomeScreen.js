@@ -1,10 +1,13 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ScrollView } from "react-native";
+import CustomListItem from "../components/CustomListItem";
 
 const HomeScreen = () => {
   return (
     <View>
-      <Text>Home Home</Text>
+      <ScrollView>
+        <CustomListItem />
+      </ScrollView>
     </View>
   );
 };

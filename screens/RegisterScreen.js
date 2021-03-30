@@ -19,9 +19,11 @@ const RegisterScreen = ({ navigation }) => {
     auth
       .createUserWithEmailAndPassword(email, password)
       .then((authUser) => {
-        authUser.user.update({
+        authUser.user.updateProfile({
           displayName: fullName,
-          photoURL: imageUrl || "../assets/images/def_propic.jpg",
+          photoURL:
+            imageUrl ||
+            "https://st1.bollywoodlife.com/wp-content/uploads/2020/09/FotoJet382.jpg",
         });
       })
       .catch((err) => alert(err.message));
