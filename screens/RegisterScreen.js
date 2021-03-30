@@ -1,6 +1,7 @@
 import React, { useLayoutEffect, useState } from "react";
 import { KeyboardAvoidingView, StyleSheet, View } from "react-native";
 import { Button, Input, Image, Text } from "react-native-elements";
+import { auth } from "../firebase";
 
 const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -14,7 +15,17 @@ const RegisterScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const register = () => {};
+  const register = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((authUser) => {
+        authUser.user.update({
+          displayName: fullName,
+          photoURL: imageUrl || "../assets/images/def_propic.jpg",
+        });
+      })
+      .catch((err) => alert(err.message));
+  };
 
   return (
     <KeyboardAvoidingView style={styles.container}>
@@ -44,7 +55,6 @@ const RegisterScreen = ({ navigation }) => {
         />
         <Input
           placeholder="Profile Pic URL (optional)"
-          secureTextEntry
           value={imageUrl}
           onChangeText={(text) => setImageUrl(text)}
           onSubmitEditing={register}
