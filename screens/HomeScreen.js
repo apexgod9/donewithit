@@ -11,13 +11,19 @@ import CustomListItem from "../components/CustomListItem";
 import { auth, db } from "../firebase";
 
 const HomeScreen = ({ navigation }) => {
+  const signOutUser = () => {
+    auth.signOut().then(() => {
+      navigation.replace("Login");
+    });
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
-      title: "Doramon",
+      title: "Birbal",
       headerStyle: { backgroundColor: "#b67162" },
       headerLeft: () => (
         <View style={{ marginLeft: 10 }}>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
             <Avatar rounded source={{ uri: auth?.currentUser?.photoURL }} />
           </TouchableOpacity>
         </View>
