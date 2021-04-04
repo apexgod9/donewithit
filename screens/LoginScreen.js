@@ -17,6 +17,7 @@ const LoginScreen = ({ navigation }) => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((authUser) => {
+      console.log(authUser);
       if (authUser) {
         navigation.replace("Home");
       }
@@ -24,7 +25,10 @@ const LoginScreen = ({ navigation }) => {
     return unsubscribe;
   }, []);
 
-  const signIn = () => {};
+  const signIn = () => {
+    auth.signInWithEmailAndPassword(email, password).catch((err) => alert(err));
+  };
+
   return (
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.loginCard}>
@@ -44,6 +48,7 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
           value={password}
           onChangeText={(text) => setPassword(text)}
+          onSubmitEditing={signIn}
         />
         <Button title="Login" containerStyle={styles.button} onPress={signIn} />
         <Text
