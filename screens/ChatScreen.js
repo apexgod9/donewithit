@@ -1,8 +1,19 @@
-import React, { useLayoutEffect } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { Avatar } from "react-native-elements";
+import React, { useLayoutEffect, useState } from "react";
+import {
+  KeyboardAvoidingView,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { Avatar, Input } from "react-native-elements";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 const ChatScreen = ({ navigation, route }) => {
+  const [input, setInput] = useState("");
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Chat",
@@ -52,13 +63,54 @@ const ChatScreen = ({ navigation, route }) => {
       ),
     });
   }, []);
+
+  const sendMessage = () => {};
+
   return (
-    <View>
-      <Text>boom!</Text>
-    </View>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "android" ? "height" : "padding"}
+        style={styles.container}
+        keyboardVerticalOffset={90}
+      >
+        <>
+          <ScrollView>{/*chat is displayed here*/}</ScrollView>
+          <View style={styles.footer}>
+            <Input
+              style={styles.textInput}
+              placeholder="Your message..."
+              value={input}
+              onChangeText={(text) => setInput(text)}
+            />
+            <TouchableOpacity activeOpacity={0.5} onPress={sendMessage}>
+              <Ionicons name="send" size={24} color="#b34180" />
+            </TouchableOpacity>
+          </View>
+        </>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 export default ChatScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: { flex: 1 },
+  footer: {
+    flexDirection: "row",
+    width: "100%",
+    alignItems: "center",
+    padding: 15,
+  },
+  textInput: {
+    bottom: 0,
+    height: 40,
+    flex: 1,
+    marginRight: 15,
+    borderColor: "transparent",
+    backgroundColor: "#ECECEC",
+    padding: 10,
+    color: "grey",
+    borderRadius: 30,
+  },
+});
