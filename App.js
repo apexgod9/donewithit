@@ -18,7 +18,7 @@ const globalSreenOptions = {
     color: "#f4f9f9",
   },
   headerTintColor: "white",
-  headerBackTitle: "Back",
+  headerBackTitle: "Backk",
 };
 
 function App() {
