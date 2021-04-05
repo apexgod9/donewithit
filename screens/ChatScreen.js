@@ -1,7 +1,7 @@
 import React, { useLayoutEffect } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Avatar } from "react-native-elements";
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 const ChatScreen = ({ navigation, route }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -32,6 +32,23 @@ const ChatScreen = ({ navigation, route }) => {
         >
           <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
+      ),
+      headerRight: () => (
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: 80,
+            marginRight: 20,
+          }}
+        >
+          <TouchableOpacity>
+            <FontAwesome name="video-camera" size={24} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity>
+            <Ionicons name="call" size={24} color="white" />
+          </TouchableOpacity>
+        </View>
       ),
     });
   }, []);
