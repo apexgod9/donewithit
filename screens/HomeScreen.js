@@ -35,7 +35,7 @@ const HomeScreen = ({ navigation }) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       title: "Birbal",
-      headerStyle: { backgroundColor: "#b67162" },
+      headerStyle: { backgroundColor: "#b34180" },
       headerLeft: () => (
         <View style={{ marginLeft: 10 }}>
           <TouchableOpacity onPress={signOutUser} activeOpacity={0.5}>
@@ -64,13 +64,25 @@ const HomeScreen = ({ navigation }) => {
         </View>
       ),
     });
-  }, []);
+  }, [navigation]);
+
+  const enterChat = (id, chatName) => {
+    navigation.navigate("Chat", {
+      id,
+      chatName,
+    });
+  };
 
   return (
     <View>
       <ScrollView style={styles.container}>
         {chats.map(({ id, data: { chatName } }) => (
-          <CustomListItem key={id} id={id} chatName={chatName} />
+          <CustomListItem
+            key={id}
+            id={id}
+            chatName={chatName}
+            enterChat={enterChat}
+          />
         ))}
       </ScrollView>
     </View>
