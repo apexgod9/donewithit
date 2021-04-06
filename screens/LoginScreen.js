@@ -34,8 +34,8 @@ const LoginScreen = ({ navigation }) => {
       <View style={styles.loginCard}>
         <StatusBar style="dark" />
         <Image
-          source={require("../assets/images/logo.png")}
-          style={{ width: 100, height: 100 }}
+          source={require("../assets/images/logo.jpg")}
+          style={{ width: 100, height: 100, borderRadius: 80 }}
         />
         <Text style={styles.cardHeader}>Login</Text>
         <Input
@@ -50,25 +50,50 @@ const LoginScreen = ({ navigation }) => {
           onChangeText={(text) => setPassword(text)}
           onSubmitEditing={signIn}
         />
-        <Button title="Login" containerStyle={styles.button} onPress={signIn} />
+        <Button
+          title="Sign in"
+          containerStyle={styles.button}
+          onPress={signIn}
+        />
         <Text
-          style={{ color: "green" }}
+          style={{ color: "green", paddingBottom: 5, fontWeight: "bold" }}
           onPress={() => Linking.openURL("http://google.com")}
         >
           Forgot Password?
         </Text>
-        <Icon.Button
-          name="facebook"
-          backgroundColor="#3b5998"
-          onPress={() => {}}
-        ></Icon.Button>
-        <Icon.Button
-          name="google"
-          backgroundColor="grey"
-          onPress={() => {}}
-        ></Icon.Button>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "50%",
+            padding: 10,
+          }}
+        >
+          <View style={{ alignItems: "center" }}>
+            <Icon.Button
+              name="facebook"
+              backgroundColor="#3b5998"
+              onPress={() => {}}
+            ></Icon.Button>
+            <Text style={{ color: "#3e3ef0", fontWeight: "bold" }}>
+              Login with facebook
+            </Text>
+          </View>
+          <View style={{ alignItems: "center" }}>
+            <Icon.Button
+              name="google"
+              backgroundColor="grey"
+              onPress={() => {}}
+            ></Icon.Button>
+            <Text style={{ color: "#c40c0f", fontWeight: "bold" }}>
+              Login with google
+            </Text>
+          </View>
+        </View>
       </View>
-      <Text style={{ color: "green" }}>Don't have an account?</Text>
+      <Text style={{ color: "green", fontWeight: "bold" }}>
+        Don't have an account?
+      </Text>
       <Button
         title="Register"
         containerStyle={styles.outerBtn}
@@ -85,17 +110,18 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8a1d1",
   },
   loginCard: {
-    backgroundColor: "#f9f3f3",
+    backgroundColor: "white",
     width: "70%",
     borderRadius: 30,
     borderWidth: 1,
     overflow: "hidden",
     alignItems: "center",
-    justifyContent: "center",
   },
   cardHeader: {
     margin: 3,
     fontSize: 29,
+    fontWeight: "bold",
+    color: "#9112c7",
   },
   button: {
     width: 80,
