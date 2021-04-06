@@ -68,7 +68,7 @@ const ChatScreen = ({ navigation, route }) => {
         </View>
       ),
     });
-  }, []);
+  }, [navigation]);
 
   const sendMessage = () => {
     Keyboard.dismiss(); // This one hides the keyboard
@@ -84,7 +84,6 @@ const ChatScreen = ({ navigation, route }) => {
   };
 
   useLayoutEffect(() => {
-    console.log(route);
     const unsubscribe = db
       .collection("chats")
       .doc(route.params.id)
@@ -142,10 +141,10 @@ const ChatScreen = ({ navigation, route }) => {
                       containerStyle={{
                         position: "absolute",
                         bottom: -15,
-                        right: -5,
+                        left: -5,
                       }}
                       bottom={-15}
-                      right={-5}
+                      left={-5}
                       size={30}
                       source={{ uri: data.photoURL }}
                     />
