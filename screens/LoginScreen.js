@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StatusBar } from "expo-status-bar";
+import { StatusBar, Platform } from "react-native";
 import {
   StyleSheet,
   View,
@@ -65,27 +65,26 @@ const LoginScreen = ({ navigation }) => {
         <View
           style={{
             flexDirection: "row",
-            justifyContent: "space-between",
-            width: "50%",
+            justifyContent: "space-evenly",
+            width: "100%",
             padding: 10,
+            margin: 10,
           }}
         >
           <View style={{ alignItems: "center" }}>
-            <Icon.Button
-              name="facebook"
-              backgroundColor="#3b5998"
-              onPress={() => {}}
-            ></Icon.Button>
+            <Image
+              source={require("../assets/images/facebookLogo.jpg")}
+              style={{ height: 50, width: 50 }}
+            ></Image>
             <Text style={{ color: "#3e3ef0", fontWeight: "bold" }}>
               Login with facebook
             </Text>
           </View>
           <View style={{ alignItems: "center" }}>
-            <Icon.Button
-              name="google"
-              backgroundColor="grey"
-              onPress={() => {}}
-            ></Icon.Button>
+            <Image
+              source={require("../assets/images/googleLogo.png")}
+              style={{ height: 50, width: 50 }}
+            ></Image>
             <Text style={{ color: "#c40c0f", fontWeight: "bold" }}>
               Login with google
             </Text>
@@ -106,13 +105,14 @@ const LoginScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#f8a1d1",
   },
   loginCard: {
     backgroundColor: "white",
-    width: "70%",
+    width: "80%",
     borderRadius: 30,
     borderWidth: 1,
     overflow: "hidden",
