@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useRef } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -9,9 +9,11 @@ import {
   TouchableOpacity,
   View,
   Keyboard,
+  TextInput,
   TouchableWithoutFeedback,
 } from "react-native";
 import { Avatar, Input } from "react-native-elements";
+import { Header } from "@react-navigation/stack";
 import { AntDesign, FontAwesome, Ionicons } from "@expo/vector-icons";
 import firebase from "firebase";
 import { auth, db } from "../firebase";
@@ -19,6 +21,7 @@ import { auth, db } from "../firebase";
 const ChatScreen = ({ navigation, route }) => {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
+  const scrollViewRef = useRef();
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -103,75 +106,81 @@ const ChatScreen = ({ navigation, route }) => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "white" }}>
       <KeyboardAvoidingView
-        behavior={Platform.OS === "android" ? "height" : "padding"}
+        // behavior={Platform.OS === "android" ? "height" : "padding"}
+
         style={styles.container}
-        keyboardVerticalOffset={90}
+
+        // style={{ flex: 1 }}
       >
-        <TouchableWithoutFeedback>
-          <>
-            <ScrollView contentContainerStyle={{ paddingTop: 15 }}>
-              {/*chat is displayed here*/}
-              {messages.map(({ id, data }) =>
-                data.email === auth.currentUser.email ? (
-                  <View key={id} style={styles.receiver}>
-                    {/* This is receiver side */}
-                    <Avatar
-                      rounded
-                      position="absolute"
-                      //For Web
-                      containerStyle={{
-                        position: "absolute",
-                        bottom: -15,
-                        right: -5,
-                      }}
-                      bottom={-15}
-                      right={-5}
-                      size={30}
-                      source={{ uri: data.photoURL }}
-                    />
-                    <Text style={styles.receiverText}>{data.message}</Text>
-                  </View>
-                ) : (
-                  <View key={id} style={styles.sender}>
-                    {/* This is sender side */}
-                    <Avatar
-                      rounded
-                      position="absolute"
-                      //For Web
-                      containerStyle={{
-                        position: "absolute",
-                        bottom: -15,
-                        left: -5,
-                      }}
-                      bottom={-15}
-                      left={-5}
-                      size={30}
-                      source={{ uri: data.photoURL }}
-                    />
-                    <Text style={styles.senderText}>{data.message}</Text>
-                    <Text style={styles.senderName}>{data.displayName}</Text>
-                  </View>
-                )
-              )}
-            </ScrollView>
-            <View style={styles.footer}>
-              <Input
-                style={styles.textInput}
-                placeholder="Your message..."
-                value={input}
-                onChangeText={(text) => setInput(text)}
-                onSubmitEditing={sendMessage}
-              />
-              <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={sendMessage}
-                style={styles.send}
-              >
-                <Ionicons name="send" size={30} color="#b34180" />
-              </TouchableOpacity>
-            </View>
-          </>
-        </TouchableWithoutFeedback>
+        <View style={{ flex: 1 }}>
+          <ScrollView
+            ref={scrollViewRef}
+            onContentSizeChange={() =>
+              scrollViewRef.current.scrollToEnd({ animated: true })
+            }
+            contentContainerStyle={{ paddingTop: 15 }}
+          >
+            {/*chat is displayed here*/}
+            {messages.map(({ id, data }) =>
+              data.email === auth.currentUser.email ? (
+                <View key={id} style={styles.receiver}>
+                  {/* This is receiver side */}
+                  <Avatar
+                    rounded
+                    position="absolute"
+                    //For Web
+                    containerStyle={{
+                      position: "absolute",
+                      bottom: -15,
+                      right: -5,
+                    }}
+                    bottom={-15}
+                    right={-5}
+                    size={30}
+                    source={{ uri: data.photoURL }}
+                  />
+                  <Text style={styles.receiverText}>{data.message}</Text>
+                </View>
+              ) : (
+                <View key={id} style={styles.sender}>
+                  {/* This is sender side */}
+                  <Avatar
+                    rounded
+                    position="absolute"
+                    //For Web
+                    containerStyle={{
+                      position: "absolute",
+                      bottom: -15,
+                      left: -5,
+                    }}
+                    bottom={-15}
+                    left={-5}
+                    size={30}
+                    source={{ uri: data.photoURL }}
+                  />
+                  <Text style={styles.senderText}>{data.message}</Text>
+                  <Text style={styles.senderName}>{data.displayName}</Text>
+                </View>
+              )
+            )}
+          </ScrollView>
+          <View style={styles.footer}>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Your message..."
+              value={input}
+              onChangeText={(text) => setInput(text)}
+              onSubmitEditing={sendMessage}
+            />
+            <TouchableOpacity
+              activeOpacity={0.5}
+              onPress={sendMessage}
+              style={styles.send}
+            >
+              <Ionicons name="send" size={30} color="#b34180" />
+            </TouchableOpacity>
+          </View>
+        </View>
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
@@ -180,8 +189,14 @@ const ChatScreen = ({ navigation, route }) => {
 export default ChatScreen;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
   footer: {
+    position: "relative",
+    bottom: 0,
     flexDirection: "row",
     alignItems: "center",
     width: "100%",
@@ -189,8 +204,9 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   textInput: {
+    flex: 1,
     bottom: 0,
-    height: 10,
+    height: 40,
     marginRight: 15,
     borderColor: "transparent",
     padding: 10,
