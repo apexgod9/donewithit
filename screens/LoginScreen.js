@@ -6,6 +6,7 @@ import {
   Text,
   Linking,
   KeyboardAvoidingView,
+  Keyboard,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { Button, Input, Image } from "react-native-elements";
@@ -26,6 +27,7 @@ const LoginScreen = ({ navigation }) => {
   }, []);
 
   const signIn = () => {
+    Keyboard.dismiss();
     auth.signInWithEmailAndPassword(email, password).catch((err) => alert(err));
   };
 
