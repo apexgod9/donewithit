@@ -33,7 +33,7 @@ const RegisterScreen = ({ navigation }) => {
     <KeyboardAvoidingView style={styles.container}>
       <View style={styles.loginCard}>
         <Image
-          source={require("../assets/images/logo.png")}
+          source={require("../assets/images/logo.jpg")}
           style={{ width: 100, height: 100 }}
         />
         <Text style={styles.cardHeader}>Register</Text>
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#f8a1d1",
   },
   loginCard: {
-    backgroundColor: "#f9f3f3",
+    backgroundColor: "white",
     width: "70%",
     borderRadius: 30,
     borderWidth: 1,

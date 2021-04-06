@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, StatusBar, Platform } from "react-native";
 import { Button, Input, Icon } from "react-native-elements";
 import { db } from "../firebase";
 
@@ -44,5 +44,7 @@ const AddChatScreen = ({ navigation }) => {
 export default AddChatScreen;
 
 const styles = StyleSheet.create({
-  container: { padding: 30 },
+  container: {
+    paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : "0",
+  },
 });
